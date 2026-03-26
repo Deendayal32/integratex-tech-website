@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>IntegrateX Tech | Shopify & Java Integration Experts</title>
+<title>IntegrateX Tech | Shopify & Java Experts</title>
 
 <style>
+
+html{scroll-behavior:smooth;}
 
 body{
 margin:0;
@@ -15,15 +17,17 @@ font-family:Arial;
 background:#f4f6f9;
 }
 
-/* header */
+/* HEADER */
 
 header{
+position:sticky;
+top:0;
+background:#0f172a;
+color:white;
+padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 40px;
-background:#0f172a;
-color:white;
 }
 
 .logo{
@@ -35,86 +39,89 @@ nav a{
 color:white;
 margin-left:20px;
 text-decoration:none;
+font-weight:bold;
 }
 
-.menu-btn{
-display:none;
-font-size:24px;
-cursor:pointer;
+nav a:hover{
+color:#60a5fa;
 }
 
-/* hero */
+/* HERO */
 
 .hero{
 text-align:center;
-padding:120px 20px;
+padding:90px 20px;
 background:linear-gradient(#2563eb,#1e3a8a);
 color:white;
 }
 
-.hero button{
-padding:12px 25px;
-border:none;
-background:white;
-color:#2563eb;
-font-weight:bold;
-cursor:pointer;
-margin-top:20px;
+.hero h1{
+font-size:36px;
 }
 
-/* sections */
+/* SECTION */
 
-section{
-padding:60px 20px;
+.section{
+padding:70px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+.section h2{
 text-align:center;
+margin-bottom:40px;
 }
+
+/* GRID */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
-margin-top:30px;
 }
+
+/* CARD */
 
 .card{
 background:white;
 padding:25px;
-border-radius:8px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* DETAILS */
+
+.detail{
+display:none;
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* contact form */
-
-form{
-max-width:400px;
-margin:auto;
-display:flex;
-flex-direction:column;
+.detail.active{
+display:block;
 }
 
-form input, form textarea{
-margin:10px 0;
-padding:10px;
-}
-
-form button{
-padding:12px;
+.back{
+margin-top:20px;
+display:inline-block;
 background:#2563eb;
 color:white;
-border:none;
+padding:10px 20px;
+border-radius:20px;
 cursor:pointer;
 }
 
-/* footer */
-
-footer{
-text-align:center;
-background:#0f172a;
-color:white;
-padding:20px;
-}
-
-/* whatsapp button */
+/* FLOAT CONTACT */
 
 .whatsapp{
 position:fixed;
@@ -122,48 +129,32 @@ bottom:20px;
 right:20px;
 background:#25D366;
 color:white;
-padding:12px 18px;
+padding:12px 20px;
 border-radius:30px;
 text-decoration:none;
 font-weight:bold;
 }
 
-/* call button */
-
-.call{
+.email{
 position:fixed;
 bottom:70px;
 right:20px;
 background:#2563eb;
 color:white;
-padding:12px 18px;
+padding:12px 20px;
 border-radius:30px;
 text-decoration:none;
 font-weight:bold;
 }
 
-/* mobile */
+/* FOOTER */
 
-@media(max-width:768px){
-
-nav{
-display:none;
-flex-direction:column;
+footer{
 background:#0f172a;
-position:absolute;
-top:60px;
-right:0;
-width:200px;
-}
-
-nav a{
-margin:10px;
-}
-
-.menu-btn{
-display:block;
-}
-
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
 }
 
 </style>
@@ -176,142 +167,270 @@ display:block;
 
 <div class="logo">IntegrateX Tech</div>
 
-<nav id="menu">
+<nav>
+
 <a href="#home">Home</a>
 <a href="#services">Services</a>
 <a href="#training">Training</a>
 <a href="#contact">Contact</a>
-</nav>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+</nav>
 
 </header>
 
+
+<!-- HOME -->
 
 <section id="home" class="hero">
 
 <h1>Shopify | NetSuite | Java Integration Experts</h1>
 
-<p>We build automation between Shopify, ERP, CRM and 3PL systems.</p>
-
-<button onclick="scrollContact()">Start Project</button>
+<p>
+We help businesses automate eCommerce platforms
+by integrating Shopify with ERP, CRM and warehouse systems.
+</p>
 
 </section>
 
 
-<section id="services">
+<!-- SERVICES -->
+
+<section id="services" class="section">
 
 <h2>Our Services</h2>
 
-<div class="grid">
+<div id="serviceCards" class="grid">
 
-<div class="card">
-<h3>Shopify Store Development</h3>
-<p>Create modern Shopify stores with custom themes.</p>
+<div class="card" onclick="showDetail('shopify')">
+<h3>Shopify Development</h3>
+<p>Custom Shopify stores and theme development.</p>
 </div>
 
-<div class="card">
-<h3>Product Upload Automation</h3>
-<p>Upload thousands of products automatically using APIs.</p>
-</div>
-
-<div class="card">
+<div class="card" onclick="showDetail('erp')">
 <h3>ERP Integration</h3>
-<p>Sync Shopify orders and inventory with ERP systems.</p>
+<p>Shopify ERP automation.</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="showDetail('automation')">
+<h3>Product Automation</h3>
+<p>Bulk product management automation.</p>
+</div>
+
+<div class="card" onclick="showDetail('crm')">
 <h3>CRM Integration</h3>
-<p>Integrate Shopify customers with CRM platforms.</p>
+<p>Customer data synchronization.</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="showDetail('warehouse')">
 <h3>3PL Integration</h3>
-<p>Warehouse and shipping automation with Shopify.</p>
+<p>Warehouse fulfillment automation.</p>
 </div>
 
-<div class="card">
-<h3>API Integration</h3>
-<p>Custom API integrations using Java Spring Boot.</p>
+<div class="card" onclick="showDetail('api')">
+<h3>Java API Development</h3>
+<p>Spring Boot microservices.</p>
 </div>
+
+</div>
+
+
+<!-- SERVICE DETAILS -->
+
+<div id="shopify" class="detail">
+
+<h2>Shopify Development</h2>
+
+<ul>
+
+<li>Shopify store setup</li>
+<li>Custom theme development</li>
+<li>Payment gateway integration</li>
+<li>SEO optimization</li>
+<li>Performance optimization</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
+
+</div>
+
+
+<div id="erp" class="detail">
+
+<h2>ERP Integration</h2>
+
+<ul>
+
+<li>Shopify NetSuite integration</li>
+<li>Inventory automation</li>
+<li>Order sync</li>
+<li>Accounting integration</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
+
+</div>
+
+
+<div id="api" class="detail">
+
+<h2>Java API Development</h2>
+
+<ul>
+
+<li>Spring Boot REST APIs</li>
+<li>Webhook integrations</li>
+<li>Microservices architecture</li>
+<li>Cloud deployment</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
 
 </div>
 
 </section>
 
 
-<section id="training">
+<!-- TRAINING -->
+
+<section id="training" class="section">
 
 <h2>Professional Training</h2>
 
-<div class="grid">
+<div id="trainingCards" class="grid">
 
-<div class="card">
-<h3>NetSuite Training</h3>
-<p>SuiteScript, REST API and NetSuite development.</p>
+<div class="card" onclick="showDetail('javaTraining')">
+<h3>Java Microservices Training</h3>
+<p>Learn Spring Boot and cloud architecture.</p>
 </div>
 
-<div class="card">
-<h3>Java Training</h3>
-<p>Java, Spring Boot, Microservices and Cloud.</p>
+<div class="card" onclick="showDetail('shopifyTraining')">
+<h3>Shopify API Training</h3>
+<p>Learn Shopify integration development.</p>
 </div>
 
-<div class="card">
-<h3>Shopify Development</h3>
-<p>Learn Shopify APIs and automation.</p>
+<div class="card" onclick="showDetail('netsuiteTraining')">
+<h3>NetSuite Integration Training</h3>
+<p>ERP integration training.</p>
 </div>
+
+</div>
+
+
+<!-- TRAINING DETAILS -->
+
+<div id="javaTraining" class="detail">
+
+<h2>Java Microservices Training</h2>
+
+<ul>
+
+<li>Spring Boot development</li>
+<li>REST API design</li>
+<li>Microservices architecture</li>
+<li>Cloud deployment</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
+
+</div>
+
+
+<div id="shopifyTraining" class="detail">
+
+<h2>Shopify API Development Training</h2>
+
+<ul>
+
+<li>Shopify API integration</li>
+<li>Webhook development</li>
+<li>App development</li>
+<li>Automation solutions</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
+
+</div>
+
+
+<div id="netsuiteTraining" class="detail">
+
+<h2>NetSuite Integration Training</h2>
+
+<ul>
+
+<li>SuiteScript development</li>
+<li>ERP API integration</li>
+<li>Data synchronization</li>
+<li>Automation workflows</li>
+
+</ul>
+
+<div class="back" onclick="back()">Back</div>
 
 </div>
 
 </section>
 
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+
+<h2>Contact</h2>
+
+<p>Email: info@integratextech.com</p>
+
+<p>WhatsApp: +91 7011710694</p>
+
+</section>
 
 
 <footer>
 
-<p>© 2026 IntegrateX Tech | API Integration Experts</p>
+© 2026 IntegrateX Tech
 
 </footer>
 
 
-<a class="whatsapp" href="https://wa.me/917011710694" target="_blank">
+<!-- FLOAT CONTACT -->
+
+<a class="email" href="mailto:info@integratextech.com">Email</a>
+
+<a class="whatsapp"
+href="https://wa.me/917011710694?text=Hello%20IntegrateX%20Tech"
+target="_blank">
+
 WhatsApp
-</a>
 
-
-<a class="call" href="tel:+917011710694">
-Call
 </a>
 
 
 <script>
 
-function scrollContact(){
+function showDetail(id){
 
-document.getElementById("contact").scrollIntoView({
-behavior:"smooth"
+document.querySelectorAll(".detail").forEach(d=>{
+d.classList.remove("active");
 });
+
+document.getElementById(id).classList.add("active");
+
+window.scrollTo(0,500);
 
 }
 
-function toggleMenu(){
+function back(){
 
-let menu=document.getElementById("menu");
-
-if(menu.style.display==="flex")
-menu.style.display="none";
-else
-menu.style.display="flex";
+document.querySelectorAll(".detail").forEach(d=>{
+d.classList.remove("active");
+});
 
 }
-
-document.getElementById("contactForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-document.getElementById("msg").innerText="Thank you! We will contact you soon.";
-
-});
 
 </script>
 
